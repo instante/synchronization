@@ -1,0 +1,28 @@
+{
+    "name": "instante/synchronization",
+    "type": "library",
+    "description": "Instante synchronization utils",
+    "keywords": [
+        "nette",
+        "instante"
+    ],
+    "license": [
+        "BSD-3-Clause",
+        "GPL-2.0",
+        "GPL-3.0"
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "nette/tester": "@dev",
+        "jakub-onderka/php-parallel-lint": "~0.6"
+    },
+    "autoload": {
+        "psr-0": {
+            "Instante\\Synchronization\\": "src/"
+        },
+        "classmap": [
+            "src/Instante/Synchronization/exceptions.php"
+        ]
+    }
+}
