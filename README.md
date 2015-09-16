@@ -1,6 +1,10 @@
 Instante race condition prevention utils
 ======
 
+[![Build Status](https://travis-ci.org/instante/synchronization.svg?branch=master)](https://travis-ci.org/instante/synchronization)
+[![Downloads this Month](https://img.shields.io/packagist/dm/instante/synchronization.svg)](https://packagist.org/packages/instante/synchronization)
+[![Latest stable](https://img.shields.io/packagist/v/instante/synchronization.svg)](https://packagist.org/packages/instante/synchronization)
+
 Requirements
 ------------
 
