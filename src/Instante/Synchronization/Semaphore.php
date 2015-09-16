@@ -33,20 +33,21 @@ class Semaphore
 
     public function synchronizeShared($id, \Closure $closure)
     {
-        $this->synchronize($id, $closure, LOCK_SH);
+        return $this->synchronize($id, $closure, LOCK_SH);
     }
 
     public function synchronizeExclusive($id, \Closure $closure)
     {
-        $this->synchronize($id, $closure, LOCK_EX);
+        return $this->synchronize($id, $closure, LOCK_EX);
     }
 
     public function synchronize($id, \Closure $closure, $lockType)
     {
         $f = fopen("{$this->dir}/$id", 'c+');
         flock($f, $lockType);
-        $closure(new Storage($f));
+        $return = $closure(new Storage($f));
         flock($f, LOCK_UN);
         fclose($f);
+        return $return;
     }
 }
