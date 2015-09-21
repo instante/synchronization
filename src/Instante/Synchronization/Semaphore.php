@@ -54,12 +54,25 @@ class Semaphore
     public function synchronize($id, \Closure $closure, $lockType)
     {
         $f = fopen($this->getStorageFilePath($id), 'c+');
-        try {
-            flock($f, $lockType);
-            $return = $closure(new Storage($f));
-        } finally {
+        if (PHP_VERSION_ID >= 50500) {
+            eval('
+                try {
+                    flock($f, $lockType);
+                    $return = $closure(new \Instante\Synchronization\Storage($f));
+                } finally {
+                    flock($f, LOCK_UN);
+                    fclose($f);
+                }'
+            );
+        } else {
+            try {
+                flock($f, $lockType);
+                $return = $closure(new Storage($f));
+            } catch (\Exception $ex) {
+            }
             flock($f, LOCK_UN);
             fclose($f);
+            if (isset($ex)) throw $ex;
         }
         return $return;
     }
