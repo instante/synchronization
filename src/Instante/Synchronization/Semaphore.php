@@ -43,11 +43,14 @@ class Semaphore
 
     public function synchronize($id, \Closure $closure, $lockType)
     {
-        $f = fopen("{$this->dir}/$id", 'c+');
-        flock($f, $lockType);
-        $return = $closure(new Storage($f));
-        flock($f, LOCK_UN);
-        fclose($f);
+        $f = fopen($this->getStorageFilePath($id), 'c+');
+        try {
+            flock($f, $lockType);
+            $return = $closure(new Storage($f));
+        } finally {
+            flock($f, LOCK_UN);
+            fclose($f);
+        }
         return $return;
     }
 }
