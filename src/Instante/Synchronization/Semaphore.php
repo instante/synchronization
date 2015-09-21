@@ -31,6 +31,16 @@ class Semaphore
         }
     }
 
+    public function getStorageFilePath($id)
+    {
+        return $this->dir . '/' . $id;
+    }
+
+    public function purgeStorage($id)
+    {
+        @unlink($this->getStorageFilePath($id));
+    }
+
     public function synchronizeShared($id, \Closure $closure)
     {
         return $this->synchronize($id, $closure, LOCK_SH);
