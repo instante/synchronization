@@ -16,6 +16,11 @@ class Storage
         $this->f = $f;
     }
 
+    public function getSize()
+    {
+        return fstat($this->f)['size'];
+    }
+
     public function read()
     {
         fseek($this->f, 0);
