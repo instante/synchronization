@@ -1,6 +1,6 @@
 <?php
 
-namespace InstanteTests\Synchronization;
+namespace Instante\Tests\Synchronization;
 
 use Instante\Synchronization\Semaphore;
 use Instante\Synchronization\Storage;
